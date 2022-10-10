@@ -78,6 +78,7 @@ def nth_elements(list_of_list, n):
     """    Recibe una lista de listas y devuelve una 
     lista con los xnesimos elementos de la original"""
     result = []
+    # mirar como se haría con map
     for list in list_of_list:
         result.append(list[n])
     return result

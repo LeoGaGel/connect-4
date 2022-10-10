@@ -1,5 +1,5 @@
 from unittest import result
-from linear_board import LinearBoard
+from linear_board import *
 from settings import BOARD_SIZE
 from list_utils import *
 
@@ -24,10 +24,15 @@ class SquareBoard():
         return board
 
     def __init__(self):
-        self._columns = BOARD_SIZE * [LinearBoard()]
-        pass
+        """
+        Crea las columnas del tablero
+        """
+        self._columns = [LinearBoard() for i in range(BOARD_SIZE - 1)]
 
     def is_full(self):
+        """
+        Busca si cada una de las columnas está llena
+        """
         all_full = True
         for board in self._columns:
             all_full = all_full and board.is_full()
@@ -40,11 +45,14 @@ class SquareBoard():
     def is_victory(self, char):
         return self._any_vertical_victory(char) or self._any_horizontal_victory(char) or self._any_rising_victory(char) or self._any_sinking_victory(char)
     
+    def add(self, char, index):
+        self._columns[index].add(char)
+
     def _any_vertical_victory(self, char):
-        result = False
+        victory = False
         for board in self._columns:
-            result = result or board.is_victory(char)
-        return result
+            victory = victory or board.is_victory(char)
+        return victory
 
     def _any_horizontal_victory(self, char):
         # Transponemos _columns
