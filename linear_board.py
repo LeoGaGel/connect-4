@@ -31,8 +31,7 @@ class LinearBoard:
         else:
             return True
 
-        
-
+ 
     def add(self, char):
         """
         Añade una 'ficha' en dicha columna, en el primer espacio disponible

@@ -7,3 +7,5 @@ original = [[0,7,3],[4,0,1]]
 transposed = [[0,2],[7,0],[3,1]]
 print(transpose(original))
 
+original = [[0,2],[7,0],[3,1]]
+print(transpose(original))

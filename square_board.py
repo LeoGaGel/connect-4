@@ -17,10 +17,14 @@ class SquareBoard():
     
     """
     @classmethod
+    # class method no es un metodo de la instancia, si no de la clase
     def fromList(cls, list_of_lists):
-        #esto no lo entiendo
+        # return list(map(lambda x: x._column, self._columns))
+        columns = []
+        for element in list_of_lists:
+            columns.append(LinearBoard.fromList(element))
         board = cls()
-        board._columns = list(map(lambda element: LinearBoard.fromList(element, list)))
+        board._columns = columns
         return board
 
     def __init__(self):
