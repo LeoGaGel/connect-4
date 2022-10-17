@@ -64,8 +64,8 @@ class SquareBoard():
         # Creamos un tablero temporal con la transpuesta
         tmp = SquareBoard.fromList(transp)
         # Comprobamos si tiene una victoria temporal
-
-        return False
+        result = tmp._any_vertical_victory(char)
+        return result
     
     def _any_rising_victory(self, char):
         return False
