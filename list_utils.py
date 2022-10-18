@@ -105,4 +105,36 @@ def displace(l, distance, filler = None):
         res = l + filling
         res = res[abs(distance):]
         return res
+    
+def displace_matrix(matrix):
+    # creo una lista vacia que ire construyendo
+    d = []
+    # por cada columna de la matrix original la desplazo indice -1
+    for i in range(len(matrix)):
+        # añado la columna desplazada a la matriz que estoy construyendo
+        d.append(displace(matrix[i], i -1))
+    return d
 
+def replace(elements, predicate, new_value):
+    new_list = []
+    for element in elements: 
+        if predicate(element):
+            new_list.append(new_value)
+        else:
+            new_list.append(element)
+    return new_list
+
+def replace_matrix(matrix, predicate, new_element):
+    accum = []
+    for sublist in matrix:
+        accum.append(replace(sublist, predicate, new_element))
+    return accum
+
+def reverse_list(l):
+    return list(reversed(l))
+
+def reverse_matrix(m):
+    accum = []
+    for line in m:
+        accum.append(reverse_list)
+    return accum

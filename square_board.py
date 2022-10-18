@@ -31,7 +31,26 @@ class SquareBoard():
         """
         Crea las columnas del tablero
         """
-        self._columns = [LinearBoard() for i in range(BOARD_SIZE - 1)]
+        self._columns = [LinearBoard() for i in range(BOARD_SIZE)]
+
+    def __repr__(self):
+        """Devuelve una representación textual del objeto"""
+        # Obtengo la representación textual del objeto
+        matrix = self.as_matrix()
+        # Transpongo la matriz para tener filas en las listas
+        matrix = replace_matrix(matrix, lambda x: x == None, '-')
+        transp = transpose(matrix)
+        # se invierte
+        transp.reverse()
+        # Genero una cadena con todas esas listas
+        tmp = "\n"
+        for row in transp:
+            for element in row:
+                tmp += '\t' + element
+            tmp += '\n'
+        return f'<{self.__class__}:  {tmp}'
+    
+
 
     def is_full(self):
         """
@@ -67,15 +86,20 @@ class SquareBoard():
         result = tmp._any_vertical_victory(char)
         return result
     
-    def _any_rising_victory(self, char):
-        return False
-
     def _any_sinking_victory(self, char):
-        return False
+         # Tenemos la representación matricial del tablero
+        matrix = self.as_matrix()
+        matrix = displace_matrix(matrix)
+        # si había una victoria descendente, ahora es horizontal
+        # se crea un tablero temporal con la matriz desplazad
+        tmp = SquareBoard.fromList(matrix)
+        return tmp._any_horizontal_victory(char)
 
+    def _any_rising_victory(self, char):
+        matrix = self.as_matrix()
+        matrix = reverse_matrix(matrix)
+        tmp = SquareBoard.fromList(matrix)
+        return tmp._any_sinking_victory(char)
+        
     def add(self, char, index):
         pass
-    
-    def __repr__(self):
-        return f'{self.__class__}: {self._columns}'
-    
